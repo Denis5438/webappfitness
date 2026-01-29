@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import {
   Dumbbell, ShoppingBag, User, Plus, Clock, Play, ChevronRight, ChevronLeft,
   MoreHorizontal, Search, Home, Star, Crown, Check, X, Trash2, Edit3, Save,
-  Shield, UserCheck, UserX, Wallet, ArrowUpRight, ArrowDownLeft, History, LayoutList,
   MessageCircle, Send, Filter, BadgeCheck, Users, TrendingUp, Timer, Trophy,
   Minimize2, Maximize2, ChevronDown, Award, Bell, Settings, Camera, Upload
 } from 'lucide-react';
@@ -12,7 +11,7 @@ import { useCloudStorage } from './hooks/useCloudStorage';
 import { useApiRetry } from './hooks/useApiRetry';
 import ProgramEditor from './components/ProgramEditor';
 import ActiveWorkout from './components/ActiveWorkout';
-import Feed from './components/Feed';
+
 
 const tg = window.Telegram?.WebApp;
 const ADMIN_ID = Number(import.meta.env.VITE_ADMIN_ID || 6540555219);
@@ -2070,15 +2069,6 @@ export default function App() {
         </div>
       )}
 
-      {/* ЛЕНТА */}
-      {activeTab === 'feed' && (
-        <Feed
-          user={user}
-          fetchWithRetry={fetchWithRetry}
-          showToast={showToast}
-        />
-      )}
-
       {/* ПРОФИЛЬ */}
       {activeTab === 'profile' && (
         <div className={`p-4 ${activeWorkout && workoutMinimized ? 'pt-20' : ''}`}>
@@ -3277,11 +3267,6 @@ export default function App() {
           <button onClick={() => setActiveTab('home')} className={`min-w-[70px] flex flex-col items-center p-2 rounded-xl transition-colors ${activeTab === 'home' ? 'text-blue-500' : 'text-gray-500'}`}>
             <Home className="w-6 h-6" /><span className="text-xs mt-1">Главная</span>
           </button>
-          {user?.id !== 0 && (
-            <button onClick={() => setActiveTab('feed')} className={`min-w-[70px] flex flex-col items-center p-2 rounded-xl transition-colors ${activeTab === 'feed' ? 'text-blue-500' : 'text-gray-500'}`}>
-              <LayoutList className="w-6 h-6" /><span className="text-xs mt-1">Лента</span>
-            </button>
-          )}
           {user?.id !== 0 && (
             <button onClick={() => setActiveTab('market')} className={`min-w-[70px] flex flex-col items-center p-2 rounded-xl transition-colors ${activeTab === 'market' ? 'text-blue-500' : 'text-gray-500'}`}>
               <ShoppingBag className="w-6 h-6" /><span className="text-xs mt-1">Маркет</span>
