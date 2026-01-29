@@ -6,6 +6,8 @@ const API_URL = import.meta.env.VITE_API_URL || 'https://fitness-backendnew.repl
 const Feed = ({ user, fetchWithRetry, showToast }) => {
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [page, setPage] = useState(1);
+    const [showCreateModal, setShowCreateModal] = useState(false);
     // ... (previous code)
 
     // Comments State
